@@ -1,0 +1,10 @@
+---
+openapi: 3.0.3
+info:
+  title: "Book Manager API"
+  description: "Here's the lovely docs for the Book Manager API"
+  version: "1.0.0"
+consumes:
+  - application/json
+produces:
+  - application/json
