@@ -81,4 +81,16 @@ class BooksControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injectin
       contentType(book) mustBe Some("application/json")
     }
   }
+  "BooksController DELETE book when bookId is passed" should{
+    "return 200 ok for deleting a single book" in{
+      when(mockDataService.deleteBook(1)) thenReturn mutable.Set[Book]()
+      val controller = new BooksController(stubControllerComponents(), mockDataService)
+      val book = controller.deleteBook(1).apply(FakeRequest(DELETE, "/books/1"))
+
+      status(book) mustBe OK
+      contentType(book) mustBe Some("application/json")
+
+
+    }
+  }
 }
