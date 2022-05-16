@@ -19,8 +19,13 @@ class BooksController @Inject()(val controllerComponents: ControllerComponents, 
     dataRepository.getBook(bookId) foreach { book =>
       bookToReturn = book
     }
-    Ok(Json.toJson(bookToReturn))
+    if (bookToReturn eq null) {
+      NotFound(Json.toJson("Book not found"))
+    } else {
+      Ok(Json.toJson(bookToReturn))
+    }
   }
+
 
   def addBook() : Action[AnyContent] = Action {
     implicit request => {
