@@ -15,6 +15,13 @@ class BookRepository {
     "Scala programming language",
     "Development"
   )
+  bookList += Book(2,
+    "Dollar Bahu",
+    "Sudha Murthy",
+    "Adult Fiction",
+    "Fiction"
+  )
+
 
   def getAllBooks: mutable.Set[Book] = bookList
 
@@ -39,5 +46,7 @@ class BookRepository {
       }
     }
   }
+  def deleteBook(bookId: Long): mutable.Set[Book] =
+    bookList -= (bookList find (_.id == bookId)).get
 
 }
