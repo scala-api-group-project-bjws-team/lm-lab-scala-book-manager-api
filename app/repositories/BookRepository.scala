@@ -36,7 +36,7 @@ class BookRepository {
 
   def addBook(book: Book): Option[Book] = {
     // If book already exists then return none
-    if(bookList.exists(b => b.id == book.id)) {
+    if (bookList.exists(b => b.id == book.id)) {
       None
     }
     else {
@@ -46,7 +46,12 @@ class BookRepository {
       }
     }
   }
-  def deleteBook(bookId: Long): mutable.Set[Book] =
+  @throws(classOf[Exception])
+  def deleteBook(bookId: Long): Unit = {
+    if (!bookList.exists(_.id == bookId)) {
+      throw new Exception("Book not found")
+    }
     bookList -= (bookList find (_.id == bookId)).get
+  }
 
 }

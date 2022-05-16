@@ -19,11 +19,9 @@ class BooksController @Inject()(val controllerComponents: ControllerComponents, 
     dataRepository.getBook(bookId) foreach { book =>
       bookToReturn = book
     }
-    if (bookToReturn eq null) {
-      NotFound(Json.toJson("Book not found"))
-    } else {
-      Ok(Json.toJson(bookToReturn))
-    }
+    if (bookToReturn eq null) throw new Exception("Book not found")
+    Ok(Json.toJson(bookToReturn))
+
   }
 
 
@@ -43,7 +41,9 @@ class BooksController @Inject()(val controllerComponents: ControllerComponents, 
       Created(Json.toJson(savedBook))
     }
   }
+
       def deleteBook(bookId:Long):Action[AnyContent] = Action {
-        Ok(Json.toJson(dataRepository.deleteBook(bookId:Long)))
+        dataRepository.deleteBook(bookId:Long)
+        Ok(Json.toJson(s"Successfully delete the book with Id $bookId"))
       }
 }
