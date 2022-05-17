@@ -8,7 +8,7 @@ import play.api.test.Helpers._
 import repositories.BookRepository
 import models.Book
 import org.mockito.ArgumentMatchers.{any, anyLong}
-import org.mockito.Mockito.when
+import org.mockito.Mockito.{doNothing, when}
 import play.api.libs.json._
 
 import scala.collection.mutable
@@ -70,7 +70,7 @@ class BooksControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injectin
 
   "BooksController POST addBook" should {
 
-    "return 200 OK for adding a single book" in {
+    "return 201 OK for adding a single book" in {
 
       // Here we utilise Mockito for stubbing the request to addBook
       when(mockDataService.addBook(any())) thenReturn sampleBook
@@ -94,4 +94,5 @@ class BooksControllerSpec extends PlaySpec with GuiceOneAppPerTest with Injectin
 
     exceptionCaught.getMessage mustBe "Book not found"
   }
+
 }
